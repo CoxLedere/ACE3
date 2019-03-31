@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Ledere
- * Handle preparation animation for supported launchers.
+ * Check if launcher is a hasPreparation launcher, if so, add an action to allow reloading.
  *
  * Arguments:
  * 0: unit - Object the event handler is assigned to <OBJECT>
@@ -27,8 +27,16 @@ if (getNumber (_config >> QGVAR(hasPreparation)) != 1 || {getNumber (_config >> 
 
 private _magazine = getArray (_config >> "magazines") # 0;
 _unit removeSecondaryWeaponItem _magazine;
-/*if (backpack _unit == "") then {
-    _unit addBackpack "ACE_FakeBackpack";
-};*/
 
-_unit addMagazine _magazine;
+//Override regular reload handling so we can spawn a magazine for the launcher in on demand.
+private _actionID = _unit addAction ["", DFUNC(reloadPreparationLauncher), _magazine, 0, false, true, "ReloadMagazine"];
+
+//Running this perFrame so we can hold onto the actionID and magazine. The alternative is looping through every actionID the player has trying to find the one we created on weapon switch.
+[{currentWeapon (_this # 0) != (_this # 1)},
+    {
+        params["_unit", "_weapon", "_actionID", "_magazine"];
+        if ((_unit actionParams _actionID) # 2 isEqualTo _magazine) then {
+            _unit removeAction _actionID; //Remove the action we added above so the player can reload normally.
+        };
+    },
+[_unit, _weapon, _actionID, _magazine]] call CBA_fnc_waitUntilAndExecute;

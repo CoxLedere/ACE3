@@ -2,7 +2,7 @@ class CfgMagazines {
     class NLAW_F;
     class ACE_PreloadedMissileDummy_Base: NLAW_F {  // The base dummy magazine
         author = ECSTRING(common,ACETeam);
-        allowedSlots[] = {701,801,901};
+        allowedSlots[] = {901};
         scope = 1;
         scopeArsenal = 1;
         displayName = CSTRING(PreloadedMissileDummy);

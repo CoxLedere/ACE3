@@ -13,7 +13,6 @@ if (!hasInterface) exitWith {};
 ["weapon", {
     params ["_unit", "_weapon"];
     [_unit, _weapon] call FUNC(handlePreparation);
-    [_unit, _weapon] call FUNC(removePreparationMagazine);
     [_unit, _weapon] call FUNC(playerThrowTubeEvent);
 }] call CBA_fnc_addPlayerEventHandler;
 
