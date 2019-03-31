@@ -7,7 +7,7 @@ class CfgWeapons {
         ACE_UsedTube = "ACE_launch_NLAW_Used_F";      // The class name of the used tube.
         magazines[] = {"ACE_PreloadedMissileDummy_NLAW"};  // The dummy magazine
         model = "\A3\weapons_f\launchers\nlaw\nlaw_loaded_F";
-        class WeaponSlotsInfo : WeaponSlotsInfo {
+        class WeaponSlotsInfo: WeaponSlotsInfo {
             mass = 180;
         };
     };
@@ -21,7 +21,7 @@ class CfgWeapons {
         magazines[] = {"ACE_FiredMissileDummy"};  // This will disable the used launcher class from being fired again.
         model = "\A3\weapons_F\launchers\nlaw\nlaw_F.p3d";
         weaponPoolAvailable = 0;
-        class WeaponSlotsInfo : WeaponSlotsInfo {
+        class WeaponSlotsInfo: WeaponSlotsInfo {
             mass = 100;
         };
     };

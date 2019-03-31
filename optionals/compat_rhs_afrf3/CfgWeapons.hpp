@@ -1,5 +1,3 @@
-class WeaponSlotsInfo;
-class Eventhandlers;
 class CfgWeapons {
     
     class NVGoggles;
@@ -110,14 +108,18 @@ class CfgWeapons {
             };
         };
     };
-    class Launcher_Base_F;
+    class Launcher;
+    class Launcher_Base_F: Launcher {
+        class WeaponSlotsInfo;
+        class Eventhandlers;
+    };
     class rhs_weap_rpg7: Launcher_Base_F {
         ace_reloadlaunchers_enabled = 1;
     };
     class rhs_weap_rpg26: Launcher_Base_F {
         ACE_UsedTube = "rhs_weap_rpg26_used";
         magazines[] = {"ACE_PreloadedMissileDummy_RPG26"};
-        class WeaponSlotsInfo : WeaponSlotsInfo {
+        class WeaponSlotsInfo: WeaponSlotsInfo {
             mass = 64.2;
         };
         class Eventhandlers: Eventhandlers {
@@ -129,21 +131,21 @@ class CfgWeapons {
     class rhs_weap_rshg2: rhs_weap_rpg26 {
         ACE_UsedTube = "rhs_weap_rshg2_used";
         magazines[] = {"ACE_PreloadedMissileDummy_RSHG2"};
-        class WeaponSlotsInfo : WeaponSlotsInfo {
+        class WeaponSlotsInfo: WeaponSlotsInfo {
             mass = 90.6;
         };
     };
     class rhs_weap_rpg26_used: rhs_weap_rpg26 {
         ACE_isUsedLauncher = 1;
         magazines[] = {"ACE_FiredMissileDummy"};
-        class WeaponSlotsInfo : WeaponSlotsInfo {
+        class WeaponSlotsInfo: WeaponSlotsInfo {
             mass = 57.2;
         };
     };
     class rhs_weap_rshg2_used: rhs_weap_rshg2 {
         ACE_isUsedLauncher = 1;
         magazines[] = {"ACE_FiredMissileDummy"};
-        class WeaponSlotsInfo : WeaponSlotsInfo {
+        class WeaponSlotsInfo: WeaponSlotsInfo {
             mass = 83.6;
         };
     };

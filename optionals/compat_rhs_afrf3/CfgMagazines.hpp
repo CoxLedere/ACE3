@@ -16,14 +16,12 @@ class cfgMagazines {
     class rhs_mag_127x108mm_1470 : rhs_mag_127x108mm_50 {
         ace_isbelt = 0;
     };
-    class ACE_PreloadedMissileDummy_RPG26: ACE_PreloadedMissileDummy_Base
-    {
+    class ACE_PreloadedMissileDummy_RPG26: ACE_PreloadedMissileDummy_Base {
         ammo = "rhs_rpg26_rocket";
         type = "6 * 256";
         initSpeed = 149;
     };
-    class ACE_PreloadedMissileDummy_RSHG2: ACE_PreloadedMissileDummy_RPG26
-    {
+    class ACE_PreloadedMissileDummy_RSHG2: ACE_PreloadedMissileDummy_RPG26 {
         ammo = "rhs_rshg2_rocket";
     };
 };

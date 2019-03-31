@@ -1,5 +1,3 @@
-
-class Eventhandlers;
 class CfgWeapons {
     class NVGoggles;
     class rhsusf_ANPVS_14: NVGoggles { // Monocular
@@ -15,6 +13,10 @@ class CfgWeapons {
 
     class Pistol_Base_F;
     class Rifle_Base_F;
+    class Launcher;
+    class Launcher_Base_F: Launcher {
+        class Eventhandlers;
+    };
     class srifle_EBR_F;
     class launch_O_Titan_F;
     class GM6_base_F;
@@ -221,7 +223,7 @@ class CfgWeapons {
         lockingTargetSound[] = {"",0,1};
         lockedTargetSound[] = {"",0,1};
     };
-    class rhs_weap_M136 : Launcher_Base_F {
+    class rhs_weap_M136: Launcher_Base_F {
         ACE_UsedTube = "rhs_weap_M136_used";
         EGVAR(disposable,hasPreparation) = 1;
         magazines[] = {"ACE_PreloadedMissileDummy_M136HEAT"};
@@ -231,7 +233,7 @@ class CfgWeapons {
             };
         };
     };
-    class rhs_weap_M136_hedp:  rhs_weap_M136 {
+    class rhs_weap_M136_hedp: rhs_weap_M136 {
         ACE_UsedTube = "rhs_weap_M136_hedp_used";
         magazines[] = {"ACE_PreloadedMissileDummy_M136HEDP"};
     };
