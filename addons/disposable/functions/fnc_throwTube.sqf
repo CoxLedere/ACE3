@@ -19,10 +19,10 @@
 params ["_unit", "_launcher"];
 //Remove the weapon and "throw" it on the ground.
 _unit removeWeaponGlobal _launcher;
-private _container = createVehicle ["WeaponHolderSimulated", _unit modelToWorld ((_unit selectionPosition ["rightshoulder", "Memory"]) vectorAdd [0, 0.2, 0.1]), [], 0, "CAN_COLLIDE"];
+private _containerPosition =  ASLToATL (_unit modelToWorldWorld ((_unit selectionPosition ["rightshoulder", "Memory"]) vectorAdd [0, 0.2, 0.1])); //No direct modelSpace -> ATL, so we need to go modelSpace -> ASL then ASL -> ATL
+private _container = createVehicle ["WeaponHolderSimulated", _containerPosition, [], 0, "CAN_COLLIDE"];
 _container addWeaponCargoGlobal [_launcher, 1];
 _container setDir (getDir _unit - 90);
-//We get the current velocity of the soldier, then apply it to the launcher. Position 0 and 1 in the array are reversed because the model is rotated by 90 degrees.
-//_container setVelocityModelSpace [(velocityModelSpace _unit select 1) + 0.2, (velocityModelSpace _unit select 0) - 1.5, velocityModelSpace _unit select 2];
+//We get the current velocity of the soldier, then apply it to the launcher. Position 0 and 1 in the array are reversed because the model is rotated by 90 degrees
 _currentVelocity = velocityModelSpace _unit;
 _container setVelocityModelSpace ([_currentVelocity # 1, _currentVelocity # 0, _currentVelocity # 2] vectorAdd [0.2, -1.5, 0]);

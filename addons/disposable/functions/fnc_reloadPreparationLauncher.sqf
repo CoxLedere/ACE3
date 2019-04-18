@@ -35,25 +35,17 @@ _unit addMagazine _magazine;
 _magazines = magazinesDetailBackpack _unit;
 //We need the DisplayName of the magazine to get the right ID
 private _magazineName = getText (configFile >> "CfgMagazines" >> _magazine >> "DisplayName");
-//Set this to -1 so we can easily check if the next section fails
-private _id = -1;
-//Loop through magazinesDetail, looking for the DisplayName in each string.
-{
-    if (_x find _magazineName >= 0) then {
-        //When we find the magazine we're looking for, we split the string into an array so we can reference the specific ID every time. Non-ASCII characters shouldn't break this as we're looking from the back of the array
-        private _detailArray = _x splitString ":/";
-        _id = parseNumber (_detailArray # (count _detailArray -2));
-    };
-} forEach _magazines;
-
-if (_id == -1) then {
+//See if we can find the DisplayName for our magazine.
+_index = _magazines findIf {_x find _magazineName >= 0};
+if(_index == -1) then {
     //Something went wrong, just add the magazine directly to the launcher so they can use it
     private _launcher = secondaryWeapon _unit;
     _unit removeWeapon _launcher;
     _unit addWeapon _launcher;
     _unit selectWeapon _launcher;
 } else {
-    //Force the player to load the launcher with animation
+    private _detailArray = (_magazines # _index) splitString ":/";
+    private _id = parseNumber (_detailArray # (count _detailArray -2));
     _unit action ["loadMagazine", _unit, _unit, 0, _id, currentWeapon _unit, currentMuzzle _unit];
 };
 
