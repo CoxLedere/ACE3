@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Nelson Duarte, SilentSpike
  * Handles camera initialisation and destruction
@@ -13,8 +14,6 @@
  *
  * Public: No
  */
-
-#include "script_component.hpp"
 
 params ["_init"];
 TRACE_1("cam",_init);
@@ -79,6 +78,10 @@ if (_init) then {
     // Store camera
     GVAR(camera) = _camera;
 
+    // Create agent used to fix draw3D in free camera for case where player is perma-dead
+    GVAR(camAgentFree) = createAgent [QGVAR(virtual), [0,0,0], [], 0, "NONE"];
+    GVAR(camAgentFree) enableSimulation false; // Prevent falling into water
+
     // Create dummy target used for follow camera
     GVAR(camDummy) = "Logic" createVehicleLocal getPosASLVisual GVAR(camFocus);
 
@@ -120,8 +123,12 @@ if (_init) then {
     // Remove camera variable
     GVAR(camera) = nil;
 
+    // Destroy free camera agent
+    deleteVehicle GVAR(camAgentFree);
+    GVAR(camAgentFree) = nil;
+
     // Destroy dummy target
-    deleteVehicle (GVAR(camDummy));
+    deleteVehicle GVAR(camDummy);
     GVAR(camDummy) = nil;
 
     // Stop tracking everything

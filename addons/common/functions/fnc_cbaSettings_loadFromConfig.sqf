@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: PabstMirror
  * Converts a ace_setting config into a cba setting
@@ -13,8 +14,6 @@
  *
  * Public: No
  */
-// #define DEBUG_MODE_FULL
-#include "script_component.hpp"
 
 params ["_config"];
 
@@ -61,6 +60,7 @@ case ("SCALAR"): { // ACE's Scalar can be a float or an index for a list
             _cbaValueInfo = if (isArray (_config >> "sliderSettings")) then {
                 getArray (_config >> "sliderSettings");
             } else {
+                INFO_1("Using auto min/max for [%1]",_varName);
                 [-1, 5000, 0, 1]
             };
             _cbaValueInfo set [2, getNumber (_config >> "value")];

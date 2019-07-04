@@ -1,5 +1,12 @@
-
 class CfgWeapons {
+    
+    class NVGoggles;
+    class rhs_1PN138: NVGoggles { // Monocular
+        modelOptics = "";
+        EGVAR(nightvision,border) = QPATHTOEF(nightvision,data\nvg_mask_4096.paa);
+        EGVAR(nightvision,bluRadius) = 0.13;
+    };
+    
     class hgun_Rook40_F;
     class rhs_weap_pya: hgun_Rook40_F {
         ACE_barrelTwist = 254.0;
@@ -59,7 +66,7 @@ class CfgWeapons {
         ACE_barrelTwist = 240.03;
         ACE_barrelLength = 645.16;
     };
-    class rhs_weap_rpk74m: rhs_weap_pkp {
+    class rhs_weap_rpk74: rhs_weap_pkp {
         ACE_barrelTwist = 195.072;
         ACE_barrelLength = 589.28;
     };
@@ -101,9 +108,46 @@ class CfgWeapons {
             };
         };
     };
-    class Launcher_Base_F;
+    class Launcher;
+    class Launcher_Base_F: Launcher {
+        class WeaponSlotsInfo;
+        class Eventhandlers;
+    };
     class rhs_weap_rpg7: Launcher_Base_F {
         ace_reloadlaunchers_enabled = 1;
+    };
+    class rhs_weap_rpg26: Launcher_Base_F {
+        ACE_UsedTube = "rhs_weap_rpg26_used";
+        magazines[] = {"ACE_PreloadedMissileDummy_RPG26"};
+        class WeaponSlotsInfo: WeaponSlotsInfo {
+            mass = 64.2;
+        };
+        class Eventhandlers: Eventhandlers {
+            class RHS_DisposableWeapon {
+                fired = "";
+            };
+        };
+    };
+    class rhs_weap_rshg2: rhs_weap_rpg26 {
+        ACE_UsedTube = "rhs_weap_rshg2_used";
+        magazines[] = {"ACE_PreloadedMissileDummy_RSHG2"};
+        class WeaponSlotsInfo: WeaponSlotsInfo {
+            mass = 90.6;
+        };
+    };
+    class rhs_weap_rpg26_used: rhs_weap_rpg26 {
+        ACE_isUsedLauncher = 1;
+        magazines[] = {"ACE_FiredMissileDummy"};
+        class WeaponSlotsInfo: WeaponSlotsInfo {
+            mass = 57.2;
+        };
+    };
+    class rhs_weap_rshg2_used: rhs_weap_rshg2 {
+        ACE_isUsedLauncher = 1;
+        magazines[] = {"ACE_FiredMissileDummy"};
+        class WeaponSlotsInfo: WeaponSlotsInfo {
+            mass = 83.6;
+        };
     };
 
     #define HEARING_PROTECTION_VICCREW EGVAR(hearing,protection) = 0.85; EGVAR(hearing,lowerVolume) = 0.6;

@@ -1,15 +1,25 @@
 class CfgMagazines {
     class NLAW_F;
-    class ACE_PreloadedMissileDummy: NLAW_F {  // The dummy magazine
+    class ACE_PreloadedMissileDummy_Base: NLAW_F {  // The base dummy magazine
         author = ECSTRING(common,ACETeam);
+        allowedSlots[] = {901};
         scope = 1;
         scopeArsenal = 1;
         displayName = CSTRING(PreloadedMissileDummy);
-        picture = "a3\ui_f\data\IGUI\Cfg\Targeting\Empty_ca.paa";
+        picture = "\a3\ui_f\data\IGUI\Cfg\Targeting\Empty_ca.paa";
+        model = "\A3\weapons_f\empty";
+        modelSpecial = "";
         weaponPoolAvailable = 0;
         mass = 0;
+        initSpeed = 5;
+        maxLeadSpeed = 23;
     };
-    class ACE_FiredMissileDummy: ACE_PreloadedMissileDummy {
+    class ACE_FiredMissileDummy: ACE_PreloadedMissileDummy_Base {
         count = 0;
     };
+    class ACE_PreloadedMissileDummy_NLAW: ACE_PreloadedMissileDummy_Base { // Dummy NLAW magazine.
+        initSpeed = 40;
+        maxLeadSpeed = 40;
+    };
+    class ACE_PreloadedMissileDummy: ACE_PreloadedMissileDummy_NLAW {};  // Technically a breaking change without this.
 };
